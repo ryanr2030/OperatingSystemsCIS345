@@ -25,7 +25,7 @@ void * sumSqrt(void* i){
 			psum+=result;
 		
 	}
-
+	//place mutex lock here to allow cuncurrent calculation of squares for each thread
 	//Entering Critical Region lock shared variable ssum (sum of all sqr roots)
 	pthread_mutex_lock(&sumlock);
 	ssum=ssum+psum;
@@ -73,7 +73,8 @@ int main(int argc, char *argv[]){
 	pthread_join(t1,NULL);
 	pthread_join(t2,NULL);
 	printf("\nThe sum of the sqrts from 1 to %i is %f\n", n, ssum);
-
+	
+	//execution time calculation
 	clock_t end=clock();
 	double executionTime=(double)(end-begin)/CLOCKS_PER_SEC*pow(10,3);
 	printf("Execution Time: %f ms\n",executionTime);
