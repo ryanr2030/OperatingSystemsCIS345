@@ -1,4 +1,3 @@
-
 #include <stdio.h>
 #include <pthread.h> 
 #include <math.h>
@@ -25,7 +24,7 @@ void * sumSqrt(void* i){
 			psum+=result;
 		
 	}
-	//place mutex lock here to allow cuncurrent calculation of squares for each thread
+	//place mutex lock here to allow cuncurrent calculation of squares for each thread above and prevent race condition when saving total sum ssum
 	//Entering Critical Region lock shared variable ssum (sum of all sqr roots)
 	pthread_mutex_lock(&sumlock);
 	ssum=ssum+psum;
