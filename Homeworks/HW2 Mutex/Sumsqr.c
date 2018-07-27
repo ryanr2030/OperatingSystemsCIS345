@@ -4,6 +4,7 @@
 #include <math.h>
 #include <stdlib.h> 
 #include <unistd.h> 
+#include <time.h>
 
 
 int sp1[2];
@@ -40,6 +41,7 @@ int main(int argc, char *argv[]){
 	printf("No number entered");
 	return EXIT_FAILURE;
 	}
+	clock_t begin=clock();
 	//convert char string in arg at index 1 from chars to integer
 	int n = atoi(argv[1]);
 	
@@ -72,7 +74,9 @@ int main(int argc, char *argv[]){
 	pthread_join(t2,NULL);
 	printf("\nThe sum of the sqrts from 1 to %i is %f\n", n, ssum);
 
-
+	clock_t end=clock();
+	double executionTime=(double)(end-begin)/CLOCKS_PER_SEC*pow(10,3);
+	printf("Execution Time: %f ms\n",executionTime);
 	
 	return 0;
 }
